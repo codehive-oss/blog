@@ -8,21 +8,30 @@
     "start": "node ./dist/server/entry.mjs",
     "build": "env-cmd astro build",
     "preview": "astro preview",
+    "lint": "eslint ./src/**/*.{ts,astro} --fix",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/node": "^4.0.0",
     "@astrojs/react": "^1.2.2",
+    "astro": "^1.7.0",
     "axios": "^1.2.2",
     "env-cmd": "^10.1.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "astro": "^1.7.0"
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-astro": "^0.21.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.2",
+    "prettier-plugin-astro": "^0.7.2",
     "wp-types": "^3.61.0"
   }
 }
