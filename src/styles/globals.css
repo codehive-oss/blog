@@ -1,3 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply text-sea bg-jet;
+  }
+
+  header {
+    @apply pb-16 text-misty bg-gradient-to-b from-dark to-jet;
+  }
+
+  nav > ul {
+    @apply flex gap-x-4;
+  }
+
+  a {
+    @apply text-misty;
+  }
+
+  p {
+    @apply my-2;
+  }
+
+  h1 {
+    @apply font-bold text-turquoise text-6xl;
+  }
+
+  h2 {
+    @apply text-turquoise text-2xl;
+  }
+
+  article {
+    @apply container mx-8;
+  }
+
+  article > div {
+    @apply my-8;
+  }
+
+  article > div > * {
+    @apply my-2;
+  }
+
+  article > div > h2 {
+    @apply font-bold text-turquoise text-4xl;
+  }
+}
+
+@layer components {
+  .card {
+    @apply p-4 my-4 mx-8 rounded bg-black border-2 border-sea;
+  }
+}

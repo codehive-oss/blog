@@ -9,11 +9,11 @@ const author = await getUser(post?.author!);
 ---
 
 <Layout title={post?.title.rendered ?? "Post not found"}>
-  <article class="prose">
+  <article>
     {
       post ? (
         <>
-          <h1 class="mb-0">{post.title.rendered}</h1>
+          <h1>{post.title.rendered}</h1>
           <a href={`/users/${author?.id}`}>by {author?.name}</a>
 
           <div set:html={post.content.rendered} />
