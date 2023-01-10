@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCategoriesByIds } from "../../lib/wordpress/categories";
-import { getPost, getPostBySlug } from "../../lib/wordpress/posts";
+import { getPostBySlug } from "../../lib/wordpress/posts";
 import { getUser } from "../../lib/wordpress/users";
 
 const { slug } = Astro.params;
@@ -19,15 +19,12 @@ const categories = await getCategoriesByIds(post?.categories!);
           <a class="mb-0" href={`/users/${author?.slug}`}>
             by {author?.name}
           </a>
-          <p class="mt-0">
-            Categories:
-            {categories.map((category) => {
-              return (
-                <a class="mx-2" href={`/categories/${category.slug}`}>
-                  {category.name + " "}
-                </a>
-              );
-            })}
+          <ul class="mt-2 flex">
+            {categories.map((category) => (
+              <li class="mr-2 bg-dark hover:bg-sea rounded-md p-1">
+                <a href={`/categories/${category.slug}`}>{category.name}</a>
+              </li>
+            ))}
           </p>
 
           <div set:html={post.content.rendered} />
