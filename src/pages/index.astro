@@ -17,7 +17,7 @@ const posts = await getAllPosts();
             <Card
               href={`/posts/${post.id}`}
               title={post.title.rendered}
-              body={`Written by ${author.name}`}
+              body={`Written by ${author?.name}`}
             />
           );
         })
