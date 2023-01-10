@@ -1,9 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getPost } from "../../lib/wordpress/posts";
+import { getUser } from "../../lib/wordpress/users";
 
 const { postId } = Astro.params;
 const post = await getPost(parseInt(postId!));
+const author = await getUser(post?.author!);
 ---
 
 <Layout title={post?.title.rendered ?? "Post not found"}>
@@ -11,7 +13,9 @@ const post = await getPost(parseInt(postId!));
     {
       post ? (
         <>
-          <h1>{post.title.rendered}</h1>
+          <h1 class="mb-0">{post.title.rendered}</h1>
+          <a href={`/users/${author?.id}`}>by {author?.name}</a>
+
           <div set:html={post.content.rendered} />
         </>
       ) : (

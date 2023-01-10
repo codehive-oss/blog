@@ -1,0 +1,44 @@
+---
+import type { WP_REST_API_Posts } from "wp-types";
+import Layout from "../../layouts/Layout.astro";
+import { getAllPosts, getPost } from "../../lib/wordpress/posts";
+import { getUser } from "../../lib/wordpress/users";
+import Card from "../../components/Card.astro";
+
+const { userId } = Astro.params;
+const user = await getUser(parseInt(userId!));
+let posts: WP_REST_API_Posts = [];
+if (user) {
+  posts = (await getAllPosts()).filter((post) => post.author == user.id);
+}
+---
+
+<Layout title={user?.name ?? "Post not found"}>
+  <article class="prose">
+    {
+      user ? (
+        <>
+          <h1 class="mb-0">User: {user.name}</h1>
+          <h2>Posts</h2>
+          {posts?.length ? (
+            <div>
+              {posts.map(async (post) => {
+                return (
+                  <Card
+                    href={`/posts/${post.id}`}
+                    title={post.title.rendered}
+                    body={`Written by ${user.name}`}
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <p>This user has not written any Posts yet</p>
+          )}
+        </>
+      ) : (
+        <h1>User not Found</h1>
+      )
+    }
+  </article>
+</Layout>
