@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "env-cmd astro dev",
     "start": "node ./dist/server/entry.mjs",
-    "build": "env-cmd astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "lint": "eslint ./src/**/*.{ts,astro} --fix",
     "astro": "astro"
