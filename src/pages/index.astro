@@ -9,14 +9,14 @@ const posts = await getAllPosts();
 <Layout title="Blog">
   <main>
     <h1 class="mx-8">Welcome to the FRG Blog</h1>
-    <br>
+    <br />
     <ul role="list">
       {
         posts.map(async (post) => {
           const author = await getUser(post.author);
           return (
             <Card
-              href={`/posts/${post.id}`}
+              href={`/posts/${post.slug}`}
               title={post.title.rendered}
               body={`Written by ${author?.name}`}
             />

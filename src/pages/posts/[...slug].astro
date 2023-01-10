@@ -1,10 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getPost } from "../../lib/wordpress/posts";
+import { getPost, getPostBySlug } from "../../lib/wordpress/posts";
 import { getUser } from "../../lib/wordpress/users";
 
-const { postId } = Astro.params;
-const post = await getPost(parseInt(postId!));
+const { slug } = Astro.params;
+const post = await getPostBySlug(slug!);
 const author = await getUser(post?.author!);
 ---
 

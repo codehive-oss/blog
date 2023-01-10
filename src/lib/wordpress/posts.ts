@@ -11,6 +11,13 @@ export const getPost = async (id: number): Promise<WP_REST_API_Post | null> => {
   }
 };
 
+export const getPostBySlug = async (
+  slug: string,
+): Promise<WP_REST_API_Post | null> => {
+  const posts = await getAllPosts();
+  return posts.filter((post) => post.slug == slug)[0] ?? null;
+};
+
 export const getAllPosts = async (): Promise<WP_REST_API_Posts> => {
   const resp = await axios.get(routes.posts());
   return resp.data;
