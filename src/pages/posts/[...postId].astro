@@ -1,0 +1,10 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getPost } from "../../lib/wordpress/posts";
+
+const {postId} = Astro.params
+const post = await getPost(parseInt(postId!))
+---
+<Layout title={"Blog Post"}>
+  <article class="prose" set:html={post.content.rendered}/>
+</Layout>
