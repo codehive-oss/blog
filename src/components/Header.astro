@@ -15,7 +15,7 @@ const links = [
   <div
     class="py-3 px-3 container mx-auto flex justify-between"
   >
-    <div>
+    <div class="btn btn-effect">
       <a class="text-xl text-misty" href="/"> FRG Hackers</a>
     </div>
     <nav aria-label="Main navigation">
@@ -23,7 +23,7 @@ const links = [
         {
           links.map(({ text, href }) => {
             return (
-              <li>
+              <li class="btn btn-effect">
                 <a href={href}>
                   {text}
                 </a>
