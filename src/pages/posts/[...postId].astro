@@ -2,9 +2,21 @@
 import Layout from "../../layouts/Layout.astro";
 import { getPost } from "../../lib/wordpress/posts";
 
-const {postId} = Astro.params
-const post = await getPost(parseInt(postId!))
+const { postId } = Astro.params;
+const post = await getPost(parseInt(postId!));
 ---
-<Layout title={"Blog Post"}>
-  <article class="prose" set:html={post.content.rendered}/>
+
+<Layout title={post?.title.rendered ?? "Post not found"}>
+  <article class="prose">
+    {
+      post ? (
+        <>
+          <h1>{post.title.rendered}</h1>
+          <div set:html={post.content.rendered} />
+        </>
+      ) : (
+        <h1>Post not Found</h1>
+      )
+    }
+  </article>
 </Layout>
