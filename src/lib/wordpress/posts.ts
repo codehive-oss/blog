@@ -22,3 +22,10 @@ export const getAllPosts = async (): Promise<WP_REST_API_Posts> => {
   const resp = await axios.get(routes.posts());
   return resp.data;
 };
+
+export const getPostOfCategory = async (
+  id: number,
+): Promise<WP_REST_API_Posts> => {
+  const posts = await getAllPosts();
+  return posts.filter((post) => post.categories?.includes(id));
+};

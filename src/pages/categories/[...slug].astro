@@ -1,0 +1,49 @@
+---
+import Card from "../../components/Card.astro";
+import Layout from "../../layouts/Layout.astro";
+import {
+  getCategoriesByIds,
+  getCategoryBySlug,
+} from "../../lib/wordpress/categories";
+import { getPostOfCategory } from "../../lib/wordpress/posts";
+import { getUser } from "../../lib/wordpress/users";
+
+const { slug } = Astro.params;
+const category = await getCategoryBySlug(slug!);
+const posts = await getPostOfCategory(category?.id!);
+---
+
+<Layout title={category?.slug ?? "Category not found"}>
+  <article>
+    {
+      category ? (
+        <>
+          <h1 class="mb-10">Category: {category.name}</h1>
+          <h2>Posts</h2>
+
+          {posts?.length ? (
+            <div>
+              <ul>
+                {posts.map(async (post) => {
+                  const user = await getUser(post.author);
+                  return (
+                    <Card
+                      href={`/posts/${post.slug}`}
+                      title={post.title.rendered}
+                      author={user!}
+                      categories={await getCategoriesByIds(post.categories!)}
+                    />
+                  );
+                })}
+              </ul>
+            </div>
+          ) : (
+            <p>This user has not written any Posts yet</p>
+          )}
+        </>
+      ) : (
+        <h1>User not Found</h1>
+      )
+    }
+  </article>
+</Layout>

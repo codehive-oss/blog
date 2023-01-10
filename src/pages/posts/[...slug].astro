@@ -1,11 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getCategoriesByIds } from "../../lib/wordpress/categories";
 import { getPost, getPostBySlug } from "../../lib/wordpress/posts";
 import { getUser } from "../../lib/wordpress/users";
 
 const { slug } = Astro.params;
 const post = await getPostBySlug(slug!);
 const author = await getUser(post?.author!);
+const categories = await getCategoriesByIds(post?.categories!);
 ---
 
 <Layout title={post?.title.rendered ?? "Post not found"}>
@@ -14,7 +16,19 @@ const author = await getUser(post?.author!);
       post ? (
         <>
           <h1>{post.title.rendered}</h1>
-          <a href={`/users/${author?.id}`}>by {author?.name}</a>
+          <a class="mb-0" href={`/users/${author?.slug}`}>
+            by {author?.name}
+          </a>
+          <p class="mt-0">
+            Categories:
+            {categories.map((category) => {
+              return (
+                <a class="mx-2" href={`/categories/${category.slug}`}>
+                  {category.name + " "}
+                </a>
+              );
+            })}
+          </p>
 
           <div set:html={post.content.rendered} />
         </>

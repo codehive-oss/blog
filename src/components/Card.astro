@@ -1,11 +1,14 @@
 ---
+import type { WP_REST_API_Categories, WP_REST_API_User } from "wp-types";
+
 export interface Props {
   title: string;
-  body: string;
+  author: WP_REST_API_User;
   href: string;
+  categories: WP_REST_API_Categories;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, author, categories } = Astro.props;
 ---
 
 <li class="card">
@@ -14,7 +17,18 @@ const { href, title, body } = Astro.props;
       {title}
     </h2>
     <p>
-      {body}
+      Written by <a href={`/users/${author.slug}`}>{author.slug}</a>
     </p>
+    <ul class="flex">
+      {
+        categories.map((category) => {
+          return (
+            <li class="mr-2 bg-jet hover:bg-sea rounded-md p-1">
+              <a href={`/categories/${category.slug}`}>{category.name}</a>
+            </li>
+          );
+        })
+      }
+    </ul>
   </a>
 </li>

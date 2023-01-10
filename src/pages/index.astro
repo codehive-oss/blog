@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import { getAllPosts } from "../lib/wordpress/posts";
 import { getUser } from "../lib/wordpress/users";
+import { getCategoriesByIds } from "../lib/wordpress/categories";
 const posts = await getAllPosts();
 ---
 
@@ -18,7 +19,8 @@ const posts = await getAllPosts();
             <Card
               href={`/posts/${post.slug}`}
               title={post.title.rendered}
-              body={`Written by ${author?.name}`}
+              author={author!}
+              categories={await getCategoriesByIds(post.categories!)}
             />
           );
         })

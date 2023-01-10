@@ -2,19 +2,20 @@
 import type { WP_REST_API_Posts } from "wp-types";
 import Layout from "../../layouts/Layout.astro";
 import { getAllPosts, getPost } from "../../lib/wordpress/posts";
-import { getUser } from "../../lib/wordpress/users";
+import { getUser, getUserBySlug } from "../../lib/wordpress/users";
 import Card from "../../components/Card.astro";
+import { getCategoriesByIds } from "../../lib/wordpress/categories";
 
-const { userId } = Astro.params;
-const user = await getUser(parseInt(userId!));
+const { slug } = Astro.params;
+const user = await getUserBySlug(slug!);
 let posts: WP_REST_API_Posts = [];
 if (user) {
   posts = (await getAllPosts()).filter((post) => post.author == user.id);
 }
 ---
 
-<Layout title={user?.name ?? "Post not found"}>
-  <article class="prose">
+<Layout title={user?.name ?? "User not found"}>
+  <article>
     {
       user ? (
         <>
@@ -22,15 +23,18 @@ if (user) {
           <h2>Posts</h2>
           {posts?.length ? (
             <div>
-              {posts.map(async (post) => {
-                return (
-                  <Card
-                    href={`/posts/${post.id}`}
-                    title={post.title.rendered}
-                    body={`Written by ${user.name}`}
-                  />
-                );
-              })}
+              <ul>
+                {posts.map(async (post) => {
+                  return (
+                    <Card
+                      href={`/posts/${post.slug}`}
+                      title={post.title.rendered}
+                      author={user}
+                      categories={await getCategoriesByIds(post.categories!)}
+                    />
+                  );
+                })}
+              </ul>
             </div>
           ) : (
             <p>This user has not written any Posts yet</p>
