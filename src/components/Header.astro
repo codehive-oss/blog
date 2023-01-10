@@ -5,6 +5,10 @@ const links = [
     href: "/",
   },
   {
+    text: "Categories",
+    href: "/categories",
+  },
+  {
     text: "About",
     href: "/about",
   },
@@ -12,9 +16,7 @@ const links = [
 ---
 
 <header id="header">
-  <div
-    class="py-3 px-3 container mx-auto flex justify-between"
-  >
+  <div class="py-3 px-3 container mx-auto flex justify-between">
     <div>
       <a class="text-xl text-misty" href="/"> FRG Hackers</a>
     </div>
@@ -24,9 +26,7 @@ const links = [
           links.map(({ text, href }) => {
             return (
               <li>
-                <a href={href}>
-                  {text}
-                </a>
+                <a href={href}>{text}</a>
               </li>
             );
           })
