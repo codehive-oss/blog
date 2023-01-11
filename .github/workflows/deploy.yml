@@ -6,6 +6,7 @@ on:
 
 jobs:
   docker:
+    environment: BuildEnv
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -20,7 +21,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          environment: BuildEnv
           build-args: |
             "WORDPRESS_URL=$WORDPRESS_URL"
           push: true
