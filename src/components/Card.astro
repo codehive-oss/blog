@@ -21,7 +21,7 @@ if (media) {
 }
 ---
 
-<li class="card">
+<li class="card" onclick={`location.href='${href}'`} style="cursor: pointer;">
   <a href={href}>
     {
       image && image.media_type == "image" && (
