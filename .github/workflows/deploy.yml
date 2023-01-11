@@ -18,9 +18,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
       - name: Build and push
-        environment: BuildEnv
         uses: docker/build-push-action@v3
         with:
+          environment: BuildEnv
           push: true
           tags: ${{secrets.DOCKERHUB_REPOSITORY}}:latest
           platforms: linux/amd64, linux/arm64/v8
