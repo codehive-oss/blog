@@ -9,7 +9,8 @@
     "build": "env-cmd --silent astro build",
     "preview": "astro preview",
     "lint": "eslint ./src/**/*.{ts,astro} --fix",
-    "astro": "astro"
+    "astro": "astro",
+    "fix": "yarn-audit-fix"
   },
   "dependencies": {
     "@astrojs/node": "^4.0.0",
@@ -24,7 +25,8 @@
     "node-cron": "^3.0.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "tailwindcss": "^3.0.24"
+    "tailwindcss": "^3.0.24",
+    "yarn-audit-fix": "^9.3.7"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.8",
