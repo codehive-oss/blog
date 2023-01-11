@@ -1,23 +1,46 @@
 ---
-import type { WP_REST_API_Categories, WP_REST_API_User } from "wp-types";
+import type { WP_REST_API_Attachment, WP_REST_API_Post } from "wp-types";
+import { getMedia } from "../lib/wordpress/media";
+import { Image } from "@astrojs/image/components";
+import { getUser } from "../lib/wordpress/users";
+import { getCategoriesByIds } from "../lib/wordpress/categories";
 
 export interface Props {
-  title: string;
-  author: WP_REST_API_User;
-  href: string;
-  categories: WP_REST_API_Categories;
+  post: WP_REST_API_Post;
 }
 
-const { href, title, author, categories } = Astro.props;
+const { post } = Astro.props;
+const href = `/posts/${post.slug}`;
+const title = post.title.rendered;
+const author = await getUser(post.author);
+const categories = await getCategoriesByIds(post.categories!);
+const published = post.date;
+const media = post.featured_media;
+let image: WP_REST_API_Attachment | null = null;
+if (media) {
+  image = await getMedia(media);
+}
 ---
 
 <li class="card">
   <a href={href}>
+    {
+      image && image.media_type == "image" && (
+        <img
+          class="max-w-xs max-h-xs"
+          src={image.source_url}
+          alt="Featured Image"
+        />
+      )
+    }
     <h2 class="underline">
       {title}
     </h2>
     <p>
-      Written by <a href={`/users/${author.slug}`}>{author.slug}</a>
+      Written by <a class="underline" href={`/users/${author?.slug}`}
+        >{author?.slug}</a
+      >
+      {new Date(published).toDateString()}
     </p>
     <ul class="flex">
       {

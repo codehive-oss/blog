@@ -10,4 +10,5 @@ export const routes = {
   user: (id: number) => `${BASE_URL}/users/${id}`,
   categories: () => `${BASE_URL}/categories`,
   category: (id: number) => `${BASE_URL}/categories/${id}`,
+  media: (id: number) => `${BASE_URL}/media/${id}`,
 };

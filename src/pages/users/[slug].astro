@@ -35,14 +35,7 @@ if (user) {
             <div>
               <ul>
                 {posts.map(async (post) => {
-                  return (
-                    <Card
-                      href={`/posts/${post.slug}`}
-                      title={post.title.rendered}
-                      author={user}
-                      categories={await getCategoriesByIds(post.categories!)}
-                    />
-                  );
+                  return <Card post={post} />;
                 })}
               </ul>
             </div>

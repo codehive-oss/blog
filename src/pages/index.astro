@@ -14,15 +14,7 @@ const posts = await getAllPosts();
     <ul role="list">
       {
         posts.map(async (post) => {
-          const author = await getUser(post.author);
-          return (
-            <Card
-              href={`/posts/${post.slug}`}
-              title={post.title.rendered}
-              author={author!}
-              categories={await getCategoriesByIds(post.categories!)}
-            />
-          );
+          return <Card post={post} />;
         })
       }
     </ul>

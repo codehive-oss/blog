@@ -16,6 +16,7 @@ export const getCategoryById = async (
 export const getCategoriesByIds = async (
   ids: number[],
 ): Promise<WP_REST_API_Categories> => {
+  if (!ids) return [];
   const categories = await getAllCategories();
   return categories.filter((category) => ids.includes(category.id));
 };

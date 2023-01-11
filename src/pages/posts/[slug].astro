@@ -21,7 +21,7 @@ const categories = await getCategoriesByIds(post?.categories!);
 ---
 
 <Layout title={post?.title.rendered ?? "Post not found"}>
-  <article>
+  <article class="px-10 max-w-4xl">
     {
       post ? (
         <>
