@@ -12,8 +12,5 @@ export default defineConfig({
       applyBaseStyles: false
     }
   }), sitemap()],
-  output: "server",
-  adapter: node({
-    mode: "standalone"
-  })
+  output: "static",
 });

@@ -1,4 +1,8 @@
 FROM node:alpine AS builder
+
+ARG WORDPRSS_URL
+ENV WORDPRESS_URL ${WORDPRESS_URL}
+
 WORKDIR /app
 RUN apk update
 
@@ -11,6 +15,7 @@ COPY . .
 RUN yarn build
 
 FROM node:alpine AS runner
+
 WORKDIR /app
 RUN apk update
 

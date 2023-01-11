@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+
+  img {
+    @apply rounded-md
+  }
+
   html {
     @apply h-full;
   }

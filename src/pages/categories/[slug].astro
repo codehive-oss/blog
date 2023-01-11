@@ -1,7 +1,18 @@
 ---
+export async function getStaticPaths() {
+  return (await getAllCategories()).map((category) => {
+    return {
+      params: {
+        slug: category.slug,
+      },
+    };
+  });
+}
+
 import Card from "../../components/Card.astro";
 import Layout from "../../layouts/Layout.astro";
 import {
+  getAllCategories,
   getCategoriesByIds,
   getCategoryBySlug,
 } from "../../lib/wordpress/categories";
