@@ -1,17 +1,16 @@
-import axios from "axios";
 import { routes } from "./routes";
 import type { WP_REST_API_Categories, WP_REST_API_Category } from "wp-types";
 
 export const getAllCategories = async (): Promise<WP_REST_API_Categories> => {
-  const resp = await axios.get(routes.categories());
-  return resp.data;
+  const resp = await fetch(routes.categories());
+  return await resp.json();
 };
 
 export const getCategoryById = async (
   id: number,
 ): Promise<WP_REST_API_Category | null> => {
-  const resp = await axios.get(routes.category(id));
-  return resp.data ?? null;
+  const resp = await fetch(routes.category(id));
+  return (await resp.json()) ?? null;
 };
 
 export const getCategoriesByIds = async (
