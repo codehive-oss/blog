@@ -13,11 +13,9 @@ import Card from "../../components/Card.astro";
 import Layout from "../../layouts/Layout.astro";
 import {
   getAllCategories,
-  getCategoriesByIds,
   getCategoryBySlug,
 } from "../../lib/wordpress/categories";
 import { getPostOfCategory } from "../../lib/wordpress/posts";
-import { getUser } from "../../lib/wordpress/users";
 
 const { slug } = Astro.params;
 const category = await getCategoryBySlug(slug!);
@@ -36,15 +34,7 @@ const posts = await getPostOfCategory(category?.id!);
             <div>
               <ul>
                 {posts.map(async (post) => {
-                  const user = await getUser(post.author);
-                  return (
-                    <Card
-                      href={`/posts/${post.slug}`}
-                      title={post.title.rendered}
-                      author={user!}
-                      categories={await getCategoriesByIds(post.categories!)}
-                    />
-                  );
+                  return <Card post={post} />;
                 })}
               </ul>
             </div>
