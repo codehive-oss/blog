@@ -23,6 +23,7 @@ COPY ./package.json ./package.json
 COPY yarn.lock ./yarn.lock
 
 COPY --from=builder /app/dist/ ./dist
+COPY --from=builder /app/server/ ./server
 
 RUN yarn install --production
 
