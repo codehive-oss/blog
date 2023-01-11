@@ -11,8 +11,5 @@ export default defineConfig({
       config: { applyBaseStyles: false },
     }),
   ],
-  output: "server",
-  adapter: node({
-    mode: "standalone",
-  }),
+  output: "static",
 });

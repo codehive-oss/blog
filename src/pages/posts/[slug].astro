@@ -1,7 +1,17 @@
 ---
+export async function getStaticPaths() {
+  return (await getAllPosts()).map((post) => {
+    return {
+      params: {
+        slug: post.slug,
+      },
+    };
+  });
+}
+
 import Layout from "../../layouts/Layout.astro";
 import { getCategoriesByIds } from "../../lib/wordpress/categories";
-import { getPostBySlug } from "../../lib/wordpress/posts";
+import { getAllPosts, getPostBySlug } from "../../lib/wordpress/posts";
 import { getUser } from "../../lib/wordpress/users";
 
 const { slug } = Astro.params;
