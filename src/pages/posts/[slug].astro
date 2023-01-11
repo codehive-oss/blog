@@ -1,7 +1,17 @@
 ---
+export async function getStaticPaths() {
+  return (await getAllPosts()).map((post) => {
+    return {
+      params: {
+        slug: post.slug,
+      },
+    };
+  });
+}
+
 import Layout from "../../layouts/Layout.astro";
 import { getCategoriesByIds } from "../../lib/wordpress/categories";
-import { getPostBySlug } from "../../lib/wordpress/posts";
+import { getAllPosts, getPostBySlug } from "../../lib/wordpress/posts";
 import { getUser } from "../../lib/wordpress/users";
 
 const { slug } = Astro.params;
@@ -15,8 +25,8 @@ const categories = await getCategoriesByIds(post?.categories!);
     {
       post ? (
         <>
-          <h1>{post.title.rendered}</h1>
-          <a class="mb-0" href={`/users/${author?.slug}`}>
+          <h1 class="mb-3">{post.title.rendered}</h1>
+          <a class="mb-3" href={`/users/${author?.slug}`}>
             by {author?.name}
           </a>
           <ul class="mt-2 flex">
@@ -25,7 +35,7 @@ const categories = await getCategoriesByIds(post?.categories!);
                 <a href={`/categories/${category.slug}`}>{category.name}</a>
               </li>
             ))}
-          </p>
+          </ul>
 
           <div set:html={post.content.rendered} />
         </>

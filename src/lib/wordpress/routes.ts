@@ -1,5 +1,6 @@
 import { WP_URL } from "../env";
 
+console.log(WP_URL);
 const BASE_URL = `${WP_URL}/wp-json/wp/v2`;
 
 export const routes = {

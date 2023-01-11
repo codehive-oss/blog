@@ -1,8 +1,18 @@
 ---
+export async function getStaticPaths() {
+  return (await getAllUsers()).map((user) => {
+    return {
+      params: {
+        slug: user.slug,
+      },
+    };
+  });
+}
+
 import type { WP_REST_API_Posts } from "wp-types";
 import Layout from "../../layouts/Layout.astro";
 import { getAllPosts, getPost } from "../../lib/wordpress/posts";
-import { getUser, getUserBySlug } from "../../lib/wordpress/users";
+import { getAllUsers, getUser, getUserBySlug } from "../../lib/wordpress/users";
 import Card from "../../components/Card.astro";
 import { getCategoriesByIds } from "../../lib/wordpress/categories";
 
