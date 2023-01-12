@@ -12,7 +12,8 @@ const { post } = Astro.props;
 const href = `/posts/${post.slug}`;
 const title = post.title.rendered;
 const author = await getUser(post.author);
-const categories = await getCategoriesByIds(post.categories!);
+const categories =
+  post.categories && (await getCategoriesByIds(post.categories));
 const published = post.date;
 const media = post.featured_media;
 let image: WP_REST_API_Attachment | null = null;
@@ -43,13 +44,14 @@ if (media) {
     </p>
     <ul class="flex">
       {
-        categories.map((category) => {
-          return (
-            <li class="mr-2 bg-jet hover:bg-sea rounded-md p-1">
-              <a href={`/categories/${category.slug}`}>{category.name}</a>
-            </li>
-          );
-        })
+        categories &&
+          categories.map((category) => {
+            return (
+              <li class="mr-2 bg-jet hover:bg-sea rounded-md p-1">
+                <a href={`/categories/${category.slug}`}>{category.name}</a>
+              </li>
+            );
+          })
       }
     </ul>
   </a>

@@ -11,19 +11,19 @@ export async function getStaticPaths() {
 
 import type { WP_REST_API_Posts } from "wp-types";
 import Layout from "../../layouts/Layout.astro";
-import { getAllPosts, getPost } from "../../lib/wordpress/posts";
-import { getAllUsers, getUser, getUserBySlug } from "../../lib/wordpress/users";
+import { getAllPosts } from "../../lib/wordpress/posts";
+import { getAllUsers, getUserBySlug } from "../../lib/wordpress/users";
 import Card from "../../components/Card.astro";
 
 const { slug } = Astro.params;
-const user = await getUserBySlug(slug!);
+const user = slug && (await getUserBySlug(slug));
 let posts: WP_REST_API_Posts = [];
 if (user) {
   posts = (await getAllPosts()).filter((post) => post.author == user.id);
 }
 ---
 
-<Layout title={user?.name ?? "User not found"}>
+<Layout title={(user && user.name) ?? "User not found"}>
   <article>
     {
       user ? (

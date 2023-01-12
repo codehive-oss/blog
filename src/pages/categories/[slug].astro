@@ -18,11 +18,11 @@ import {
 import { getPostOfCategory } from "../../lib/wordpress/posts";
 
 const { slug } = Astro.params;
-const category = await getCategoryBySlug(slug!);
-const posts = await getPostOfCategory(category?.id!);
+const category = slug && (await getCategoryBySlug(slug));
+const posts = category && (await getPostOfCategory(category.id));
 ---
 
-<Layout title={category?.slug ?? "Category not found"}>
+<Layout title={slug ?? "Category not found"}>
   <article>
     {
       category ? (
@@ -33,9 +33,10 @@ const posts = await getPostOfCategory(category?.id!);
           {posts?.length ? (
             <div>
               <ul>
-                {posts.map(async (post) => {
-                  return <Card post={post} />;
-                })}
+                {posts &&
+                  posts.map(async (post) => {
+                    return <Card post={post} />;
+                  })}
               </ul>
             </div>
           ) : (
