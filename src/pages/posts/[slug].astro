@@ -17,7 +17,8 @@ import { getUser } from "../../lib/wordpress/users";
 const { slug } = Astro.params;
 const post = slug && (await getPostBySlug(slug));
 const author = post && post.author && (await getUser(post.author));
-const categories = post && post.categories &&(await getCategoriesByIds(post.categories));
+const categories =
+  post && post.categories && (await getCategoriesByIds(post.categories));
 ---
 
 <Layout title={(post && post.title.rendered) ?? "Post not found"}>
@@ -26,19 +27,18 @@ const categories = post && post.categories &&(await getCategoriesByIds(post.cate
       post ? (
         <>
           <h1 class="mb-3">{post.title.rendered}</h1>
-          {author &&
-            (
+          {author && (
             <a class="mb-3" href={`/users/${author.slug}`}>
               by {author.name}
             </a>
-            )
-          }
+          )}
           <ul class="mt-2 flex">
-            {categories && categories.map((category) => (
-              <li class="mr-2 bg-dark hover:bg-sea rounded-md p-1">
-                <a href={`/categories/${category.slug}`}>{category.name}</a>
-              </li>
-            ))}
+            {categories &&
+              categories.map((category) => (
+                <li class="mr-2 bg-dark hover:bg-sea rounded-md p-1">
+                  <a href={`/categories/${category.slug}`}>{category.name}</a>
+                </li>
+              ))}
           </ul>
 
           <div set:html={post.content.rendered} />
