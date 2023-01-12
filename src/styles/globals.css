@@ -3,62 +3,33 @@
 @tailwind utilities;
 
 @layer base {
-  img {
-    @apply rounded-md;
-  }
-
   html {
     @apply h-full;
   }
-
-  body {
-    @apply text-sea bg-jet;
-  }
-
-  header {
-    @apply pb-16 text-misty bg-gradient-to-b from-dark to-jet;
-  }
-
   nav > ul {
     @apply flex gap-x-4;
   }
 
-  a {
-    @apply text-misty;
+  body {
+    @apply text-alice bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapertag.com%2Fwallpaper%2Ffull%2F0%2F4%2F3%2F679239-free-download-wallpaper-futuristic-technology-1920x1200-for-windows.jpg&f=1&nofb=1&ipt=6d3a28e2843c120122008e8713928381f6914d18c185130221c765c8da5ebd5a&ipo=images')];
   }
 
-  p {
-    @apply my-2;
+  header {
+    @apply pb-16 text-gold bg-gradient-to-b from-dark to-transparent;
   }
 
   h1 {
-    @apply font-bold text-turquoise text-4xl;
+    @apply font-bold text-4xl text-dark;
   }
-
+  
   h2 {
-    @apply text-turquoise text-2xl;
-  }
-
-  article {
-    @apply container mx-8;
-  }
-
-  article > div {
-    @apply my-8;
-  }
-
-  article > div > * {
-    @apply my-2;
-  }
-
-  article > div > h2 {
-    @apply font-bold text-turquoise text-4xl;
+    @apply text-2xl;
   }
 }
 
 @layer components {
   .card {
-    @apply p-4 my-4 mx-8 rounded-lg bg-black border-2 border-sea;
+    @apply my-4 mx-8 rounded-lg bg-dark border-4 border-dark;
     @apply transition duration-500 ease-in-out;
     @apply hover:-translate-y-2 focus:-translate-y-2;
   }
@@ -68,7 +39,7 @@
   }
 
   .btn-effect {
-    @apply outline-none border-b-2 border-transparent hover:border-misty focus:border-misty;
+    @apply outline-none border-b-2 border-transparent hover:border-alice focus:border-alice;
     @apply transition duration-200;
   }
 }

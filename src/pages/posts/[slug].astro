@@ -22,30 +22,32 @@ const categories =
 ---
 
 <Layout title={(post && post.title.rendered) ?? "Post not found"}>
-  <article class="px-10 max-w-4xl">
-    {
-      post ? (
-        <>
-          <h1 class="mb-3">{post.title.rendered}</h1>
-          {author && (
-            <a class="mb-3" href={`/users/${author.slug}`}>
-              by {author.name}
-            </a>
-          )}
-          <ul class="mt-2 flex">
-            {categories &&
-              categories.map((category) => (
-                <li class="mr-2 bg-dark hover:bg-sea rounded-md p-1">
-                  <a href={`/categories/${category.slug}`}>{category.name}</a>
-                </li>
-              ))}
-          </ul>
+  <main class="bg-dark">
+    <article class="px-10 max-w-4xl">
+      {
+        post ? (
+          <>
+            <h1 class="mb-3">{post.title.rendered}</h1>
+            {author && (
+              <a class="mb-3" href={`/users/${author.slug}`}>
+                by {author.name}
+              </a>
+            )}
+            <ul class="mt-2 flex">
+              {categories &&
+                categories.map((category) => (
+                  <li class="mr-2 bg-dark hover:bg-alice rounded-md p-1">
+                    <a href={`/categories/${category.slug}`}>{category.name}</a>
+                  </li>
+                ))}
+            </ul>
 
-          <div set:html={post.content.rendered} />
-        </>
-      ) : (
-        <h1>Post not Found</h1>
-      )
-    }
-  </article>
+            <div set:html={post.content.rendered} />
+          </>
+        ) : (
+          <h1>Post not Found</h1>
+        )
+      }
+    </article>
+  </main>
 </Layout>

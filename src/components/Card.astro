@@ -24,35 +24,39 @@ if (media) {
 
 <li class="card" onclick={`location.href='${href}'`} style="cursor: pointer;">
   <a href={href}>
-    {
-      image && image.media_type == "image" && (
-        <img
-          class="max-w-xs max-h-xs"
-          src={image.source_url}
-          alt="Featured Image"
-        />
-      )
-    }
-    <h2 class="underline">
-      {title}
-    </h2>
-    <p>
-      Written by <a class="underline" href={`/users/${author?.slug}`}
-        >{author?.slug}</a
-      >
-      {new Date(published).toDateString()}
-    </p>
-    <ul class="flex">
+    <div class="w-full h-32 lg:h-64">
       {
-        categories &&
-          categories.map((category) => {
-            return (
-              <li class="mr-2 bg-jet hover:bg-sea rounded-md p-1">
-                <a href={`/categories/${category.slug}`}>{category.name}</a>
-              </li>
-            );
-          })
+        image && image.media_type == "image" && (
+          <img
+            class="w-full h-full object-cover"
+            src={image.source_url}
+            alt="Featured Image"
+          />
+        )
       }
-    </ul>
+    </div>
+    <div class="p-4">
+      <h2 class="underline">
+        {title}
+      </h2>
+      <p>
+        Written by <a class="underline" href={`/users/${author?.slug}`}
+          >{author?.slug}</a
+        >
+        {new Date(published).toDateString()}
+      </p>
+      <ul class="flex">
+        {
+          categories &&
+            categories.map((category) => {
+              return (
+                <li class="mr-2 bg-metal hover:bg-alice rounded-md p-1">
+                  <a href={`/categories/${category.slug}`}>{category.name}</a>
+                </li>
+              );
+            })
+        }
+      </ul>
+    </div>
   </a>
 </li>

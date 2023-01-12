@@ -6,10 +6,10 @@ const posts = await getAllPosts();
 ---
 
 <Layout title="Blog">
-  <main>
+  <main class="mx-auto container">
     <h1 class="mx-8">Welcome to the FRG Blog</h1>
     <br />
-    <ul role="list">
+    <ul role="list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {
         posts.map(async (post) => {
           return <Card post={post} />;
